@@ -22,9 +22,9 @@ def generate_launch_description():
   # declare launch arguments
   declare_rviz_config_file_cmd = DeclareLaunchArgument(
     'rviz_config_file',
-    default_value=os.path.join(bringup_dir, 'models', 'youbot', 'rviz', 'view.rviz'),
+    default_value=os.path.join(bringup_dir, 'rviz', 'config.rviz'),
     description='Full path to the RVIZ config file to use')
-  
+
   declare_use_robot_state_pub_cmd = DeclareLaunchArgument(
     'use_robot_state_pub',
     default_value='True',
@@ -45,7 +45,7 @@ def generate_launch_description():
     default_value=os.path.join(bringup_dir,
                                'models',
                                'myCar',
-                               'model.sdf'),
+                               'BMW.urdf'),
     description='whether to start rviz')
 
   # declare Nodes
