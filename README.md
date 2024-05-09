@@ -20,3 +20,6 @@
         ```bash
         ros2 run joint_state_publisher_gui joint_state_publisher_gui
         ```
+* Create a launch file for rviz which should contain:
+  1. Nodes : (robot_state_publisher, Joint_state_publisher, rivz)
+  2. Launch default args : (rviz_config_dir, robot_urdf_dir, etc)
