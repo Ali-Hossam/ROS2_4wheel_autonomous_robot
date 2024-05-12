@@ -1,3 +1,8 @@
+'''
+This is a launch file that launches rviz, robot_state_publisher and
+joint_state_publisher.
+'''
+
 import os
 from ament_index_python.packages import get_package_share_directory
 
@@ -18,8 +23,9 @@ def generate_launch_description():
   use_joint_state_pub = LaunchConfiguration('use_joint_state_pub')
   use_rviz = LaunchConfiguration('use_rviz')
   urdf_file = LaunchConfiguration('urdf_file')
+  use_sim_time = LaunchConfiguration('use_sim_time', default='True')
   
-  # declare launch arguments
+  # declare launch arguments (arguments that can be specified from command line)
   declare_rviz_config_file_cmd = DeclareLaunchArgument(
     'rviz_config_file',
     default_value=os.path.join(bringup_dir, 'rviz', 'config.rviz'),
@@ -48,6 +54,11 @@ def generate_launch_description():
                                'BMW.urdf'),
     description='whether to start rviz')
 
+  declare_use_sim_time_cmd = DeclareLaunchArgument(
+    'use_sim_time',
+    default_value='False',
+    description='whether to use sim_time'
+  )
   # declare Nodes
   start_robot_state_publisher_cmd = Node(
     condition=IfCondition(use_robot_state_pub),
@@ -55,6 +66,7 @@ def generate_launch_description():
     executable='robot_state_publisher',
     name='robot_state_publisher',
     output='screen',
+    parameters=[{'use_sim_time':use_sim_time}],
     arguments=[urdf_file]
   )
   
@@ -64,6 +76,7 @@ def generate_launch_description():
     executable='joint_state_publisher_gui',
     name='joint_state_publisher_gui',
     output='screen',
+    parameters=[{'use_sim_time':use_sim_time}],
     arguments=[urdf_file]
   )
   
@@ -84,6 +97,7 @@ def generate_launch_description():
   ld.add_action(declare_use_robot_state_pub_cmd)
   ld.add_action(declare_use_robot_joint_state_pub_cmd)
   ld.add_action(declare_use_rviz_cmd)
+  ld.add_action(declare_use_sim_time_cmd)
   
   # add nodes
   ld.add_action(start_joint_state_publisher_cmd)
