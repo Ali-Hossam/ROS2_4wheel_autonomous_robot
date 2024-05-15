@@ -42,5 +42,7 @@
              ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity ROBOT_NAME
           ```
      * Alternatively, previous commands can be wrapped into a launch file
-     * 
+
+## Step 3: Control the robot
+* The first step in controlling the robot is to add `diff_drive` plugin to the xacro file of the robot.
           
