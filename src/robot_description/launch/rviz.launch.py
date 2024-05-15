@@ -52,7 +52,7 @@ def generate_launch_description():
                                'models',
                                'myCar',
                                'BMW.urdf'),
-    description='whether to start rviz')
+    description='urdf file path')
 
   declare_use_sim_time_cmd = DeclareLaunchArgument(
     'use_sim_time',
