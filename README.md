@@ -44,5 +44,5 @@
      * Alternatively, previous commands can be wrapped into a launch file
 
 ## Step 3: Control the robot
-* The first step in controlling the robot is to add `diff_drive` plugin to the xacro file of the robot.
+* The first step in controlling the robot is to add `diff_drive` plugin to the xacro file of the robot. To control a 4 wheel robot we need to use [skid_steer_drive](https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Skid-Steer-drive) plugin.
           
