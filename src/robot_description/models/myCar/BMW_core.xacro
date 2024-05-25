@@ -138,7 +138,7 @@
         <parent link="chassis"/>
         <child link="RF_wheel"/>
         <origin rpy="0 1.57 0" xyz="0.333 0.3 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz="0 0 -1"/>
     </joint>
 
     <gazebo reference="RF_wheel">
@@ -169,7 +169,7 @@
         <parent link="chassis"/>
         <child link="RB_wheel"/>
         <origin rpy="0 1.57 0" xyz="0.333 -0.3 0"/>
-        <axis xyz="0 0 1"/> 
+        <axis xyz="0 0 -1"/> 
     </joint>
 
     <gazebo reference="RB_wheel">
