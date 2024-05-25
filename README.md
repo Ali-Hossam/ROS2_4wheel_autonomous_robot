@@ -45,4 +45,9 @@
 
 ## Step 3: Control the robot
 * The first step in controlling the robot is to add `diff_drive` plugin to the xacro file of the robot. To control a 4 wheel robot we need to use [skid_steer_drive](https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Skid-Steer-drive) plugin.
+   * > Make sure that max_wheel_torque and max_wheel_acceleration values are appropriate
+
+## Step 4: Add sensors
+1. Lidar sensor using laser control plugin of libgazebo_ros_ray_sensor
+2. Camera sensor
           
