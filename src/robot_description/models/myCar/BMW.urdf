@@ -122,7 +122,7 @@
     <parent link="chassis"/>
     <child link="RF_wheel"/>
     <origin rpy="0 1.57 0" xyz="0.333 0.3 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="RF_wheel">
     <material>Gazebo/Gray</material>
@@ -150,7 +150,7 @@
     <parent link="chassis"/>
     <child link="RB_wheel"/>
     <origin rpy="0 1.57 0" xyz="0.333 -0.3 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="RB_wheel">
     <material>Gazebo/Gray</material>
@@ -211,5 +211,84 @@
   </joint>
   <gazebo reference="camera">
     <material>Gazebo/Indigo</material>
+  </gazebo>
+  <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="skid_steer_drive">
+      <!-- Update rate -->
+      <update_rate>500</update_rate>
+      <!-- Number of wheel pairs -->
+      <num_wheel_pairs>2</num_wheel_pairs>
+      <!-- wheels0 -->
+      <left_joint>LF_wheel_joint</left_joint>
+      <right_joint>RF_wheel_joint</right_joint>
+      <!-- wheels1-->
+      <left_joint>LB_wheel_joint</left_joint>
+      <right_joint>RB_wheel_joint</right_joint>
+      <!-- kinematics -->
+      <wheel_separation>0.6</wheel_separation>
+      <wheel_separation>0.6</wheel_separation>
+      <wheel_diameter>0.4</wheel_diameter>
+      <wheel_diameter>0.4</wheel_diameter>
+      <!-- limits -->
+      <max_wheel_torque>200</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+      <!-- output -->
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>dummy_link</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+    </plugin>
+  </gazebo>
+  <gazebo reference="lidar">
+    <sensor name="lidar_sensor" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>5</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <min_angle>0.0</min_angle>
+            <max_angle>6.28</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>1.0</min>
+          <max>3.5</max>
+        </range>
+      </ray>
+      <plugin filename="libgazebo_ros_ray_sensor.so" name="laser_controller">
+        <ros>
+          <!-- publish LaserScan message to the topic scan-->
+          <argument>~/out:=scan</argument>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar</frame_name>
+        <!-- lidar link name-->
+      </plugin>
+    </sensor>
+  </gazebo>
+  <gazebo reference="camera">
+    <sensor name="camera1" type="camera">
+      <update_rate>10.0</update_rate>
+      <camera name="camera1">
+        <pose>0 -0.1 0 0 0 -1.57</pose>
+        <horizontal_fov>1.4</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>BGR8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>8.0</far>
+        </clip>
+      </camera>
+      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
+        <frameName>camera</frameName>
+      </plugin>
+    </sensor>
   </gazebo>
 </robot>
