@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+  <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <!-- Hardware interface for the control manager-->
+    <ros2_control name="GazeboSystem" type="system">
+      <hardware>
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </hardware>
+
+      <!-- Joints for four wheels-->
+      <joint name="LF_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="position"/>
+      </joint>
+
+      <joint name="RF_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="position"/>
+      </joint>
+      <joint name="LB_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="position"/>
+      </joint>
+
+      <joint name="RB_wheel_joint">
+        <command_interface name="velocity">
+          <param name="min">-10</param>
+          <param name="max">10</param>
+        </command_interface>
+        <state_interface name="velocity"/>
+        <state_interface name="position"/>
+      </joint>
+    </ros2_control>
+    
+    <!-- Gazebo Plugin, that tells gazebo to use ros2 control-->
+    <gazebo>
+      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <parameters>$(find robot_description)/config/my_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+
+  </robot>

@@ -2,7 +2,8 @@
 <robot name="BMW_Car" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:include filename="BMW_core.xacro"/>
-  <xacro:include filename="gazebo_control.xacro"/>
+  <!-- <xacro:include filename="gazebo_cont rol.xacro"/> -->
+  <xacro:include filename="ros2_control.xacro"/>
   <xacro:include filename="lidar.xacro"/>
   <xacro:include filename="camera.xacro"/>
 
