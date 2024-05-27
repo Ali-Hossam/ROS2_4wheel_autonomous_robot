@@ -51,3 +51,5 @@
 1. Lidar sensor using laser control plugin of libgazebo_ros_ray_sensor
 2. Camera sensor
           
+
+## Step 5: Integrate ros2_control package and create a launch file for both gazebo and rviz
