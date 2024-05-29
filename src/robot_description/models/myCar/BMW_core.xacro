@@ -23,7 +23,7 @@
             <geometry> 
                 <box size="0.6 0.7 0.1"/> 
             </geometry> 
-            <origin rpy="0 0 0" xyz="0 0 0"/> 
+            <origin rpy="0 0 1.57" xyz="0 0 0"/> 
             <material name="darkBlue"/>
         </visual>
 
@@ -31,11 +31,11 @@
             <geometry> 
                 <box size="0.6 0.7 0.1"/> 
             </geometry> 
-            <origin rpy="0 0 0" xyz="0 0 0"/> 
+            <origin rpy="0 0 1.57" xyz="0 0 0"/> 
         </collision>
 
         <xacro:inertial_box mass="0.5" x="0.6" y="0.7" z="0.1">
-            <origin rpy="0 0 0" xyz="0 0 0"/> 
+            <origin rpy="0 0 1.57" xyz="0 0 0"/> 
         </xacro:inertial_box>
 
     </link>
@@ -73,7 +73,7 @@
     <joint name="LF_wheel_joint" type="continuous">
         <parent link="chassis"/>
         <child link="LF_wheel"/>
-        <origin rpy="0 1.57 0" xyz="-0.333 0.3 0"/>
+        <origin rpy="0 1.57 -1.57" xyz="-0.333 0.333 0"/>
         <axis xyz="0 0 -1"/>
     </joint>
 
@@ -105,7 +105,7 @@
     <joint name="LB_wheel_joint" type="continuous">
         <parent link="chassis"/>
         <child link="LB_wheel"/>
-        <origin rpy="0 1.57 0" xyz="-0.333 -0.3 0"/>
+        <origin rpy="0 1.57 -1.57" xyz="-0.333 -0.333 0"/>
         <axis xyz="0 0 -1"/>
     </joint>
     
@@ -137,7 +137,7 @@
     <joint name="RF_wheel_joint" type="continuous">
         <parent link="chassis"/>
         <child link="RF_wheel"/>
-        <origin rpy="0 1.57 0" xyz="0.333 0.3 0"/>
+        <origin rpy="0 1.57 -1.57" xyz="0.333 0.333 0"/>
         <axis xyz="0 0 -1"/>
     </joint>
 
@@ -168,7 +168,7 @@
     <joint name="RB_wheel_joint" type="continuous">
         <parent link="chassis"/>
         <child link="RB_wheel"/>
-        <origin rpy="0 1.57 0" xyz="0.333 -0.3 0"/>
+        <origin rpy="0 1.57 -1.57" xyz="0.333 -0.333 0"/>
         <axis xyz="0 0 -1"/> 
     </joint>
 
@@ -182,18 +182,18 @@
             <geometry>
                 <cylinder radius="0.15" length="0.25"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="0 -0.16 0.1"/>
+            <origin rpy="0 0 0" xyz="-0.16 0 0.1"/>
             <material name="blue"/>
         </visual>
-
+        
         <collision>
             <geometry>
                 <cylinder radius="0.15" length="0.25"/>
             </geometry>
         </collision>
-
+        
         <xacro:inertial_cylinder mass="0.2" length="0.25" radius="0.15">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin rpy="0 0 0" xyz="-0.16 0 0.1"/>
         </xacro:inertial_cylinder>
 
     </link>
@@ -214,15 +214,15 @@
             <geometry>
                 <box size="0.15 0.15 0.08"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="0 0.2 0.05"/>
+            <origin rpy="0 0 0" xyz="0.2 0 0.05"/>
             <material name="blue"/>
         </visual>
-
+        
         <collision>
             <geometry>
                 <box size="0.15 0.15 0.08"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="0 0.2 0.05"/>
+            <origin rpy="0 0 0" xyz="0.2 0 0.05"/>
         </collision>
 
         <xacro:inertial_box mass="0.2" x="0.15" y="0.15" z="0.08">
