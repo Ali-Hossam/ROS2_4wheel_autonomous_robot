@@ -5,6 +5,7 @@
 * Create a package for `robot_description` and add a `/models` directory.
 * Download [JupyterLab Editor](https://jupyterlab-urdf.readthedocs.io/en/latest/use_editor.html) for JupyterLab.
 * Create a robot in URDF format:
+    * You need to adjust the orientation of the robot's components in your URDF/Xacro file so that the x-axis points forward, the y-axis points sideways (left), and the z-axis points up.
     * The robot file must have a dummy link called anything but "world" (as naming it world causes a bug if the model is opened in gazebo), and the chassis shall be fixed to it.
     * Origin of the wheels (x, y, z) and (r, p, y) shall be defined in the joint tag.
 * To test the robot URDF model:
@@ -53,3 +54,12 @@
           
 
 ## Step 5: Integrate ros2_control package and create a launch file for both gazebo and rviz
+- To use teleop_twist_keyboard after adding ros2_control use the following command that remaps the topic (cmd_vel) into another topic:
+  `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped`
+
+### Problems
+1. Motion in Gazebo is very slow relative to rviz
+2. The robot moves forward in gazebo and sideward in rviz
+   - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
+   - Solution : Manually change xacro or urdf model so that x-axis points forward
+3. a complete rotation in rviz != a complete rotation in gazebo
