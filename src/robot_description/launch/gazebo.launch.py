@@ -13,7 +13,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
   # get launch directory
-  birngup_dir = get_package_share_directory('robot_description')
+  bringup_dir = get_package_share_directory('robot_description')
   
   # launch configuration variables specific to simulation
   urdf_file = LaunchConfiguration('urdf_file')
@@ -23,7 +23,7 @@ def generate_launch_description():
   # declare launch arguments (arguments that can be changed from CL)
   declare_urdf_cmd = DeclareLaunchArgument(
     'urdf_file',
-    default_value=os.path.join(birngup_dir,
+    default_value=os.path.join(bringup_dir,
                                'models',
                                'myCar',
                                'BMW.urdf'),
@@ -56,8 +56,11 @@ def generate_launch_description():
   gazebo_launch_file = os.path.join(
     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
 
+  gazebo_params_file_dir = os.path.join(bringup_dir, 'config', 'gazebo_params.yaml')
+
   start_gazebo_launch_file = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([gazebo_launch_file])
+      PythonLaunchDescriptionSource([gazebo_launch_file]),
+      launch_arguments={'params_file' : gazebo_params_file_dir}.items()
   )
   
   # create the launch description
