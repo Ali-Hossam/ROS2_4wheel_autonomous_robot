@@ -54,15 +54,15 @@
           
 
 ## Step 5: Integrate ros2_control package (optional) and create a launch file for both gazebo and rviz
+> ⚠️ **Warning:** 
+> I experienced synchronization problems with the `ros2_control` package when using Gazebo and RViz together. In RViz, the motion was based on joint input commands rather than the robot's actual state in Gazebo. This issue becomes apparent when you place obstacles in front of the robot in Gazebo and move it using `teleop_twist_keyboard`. The robot stops in Gazebo but continues moving in RViz.
+
 - To use teleop_twist_keyboard after adding ros2_control use the following command that remaps the topic (cmd_vel) into another topic:
   `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped`
 
-### Problems
-1. Motion in Gazebo is very slow relative to rviz
-   - Reason : Gazebo is a physics simulation so it accounts for mass, friction, etc however rviz is a visualization tool. 
-2. The robot moves forward in gazebo and sideward in rviz
+
+
+## Problems & Solutions
+1. The robot moves forward in gazebo and sideward in rviz
    - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
    - Solution : Manually change xacro or urdf model so that x-axis points forward
-3. a complete rotation in rviz != a complete rotation in gazebo
-4. When the robot collide with an object, the robot stops in gazebo but keeps moving in rviz
-   - Reason : Joint_states topic shows that robot is moving even after collision
