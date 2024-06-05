@@ -46,9 +46,10 @@
     
     <!-- Gazebo Plugin, that tells gazebo to use ros2 control-->
     <gazebo>
-      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>robot_state_publisher</robot_param_node>
         <parameters>$(find robot_description)/config/my_controllers.yaml</parameters>
       </plugin>
     </gazebo>
-
   </robot>

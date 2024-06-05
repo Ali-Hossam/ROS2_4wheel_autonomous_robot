@@ -5,7 +5,7 @@
       <pose>0 0 0 0 0 0</pose>
       <always_on>true</always_on>
       <visualize>true</visualize>
-      <update_rate>5</update_rate>
+      <update_rate>10</update_rate>
       <ray>
         <scan>
           <horizontal>
@@ -16,7 +16,7 @@
         </scan>
         <range>
           <min>1.0</min>
-          <max>3.5</max>
+          <max>5.5</max>
         </range>
       </ray>
       <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
