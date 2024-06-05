@@ -51,9 +51,14 @@
 ## Step 4: Add sensors
 1. Lidar sensor using laser control plugin of libgazebo_ros_ray_sensor
 2. Camera sensor
-          
 
-## Step 5: Integrate ros2_control package (optional) and create a launch file for both gazebo and rviz
+## Step 5: Add a launch file for both gazebo and rviz (launch_sim.launch)
+Create a custom world for gazebo in a separate directory and launch it using the new launch file with the following command
+```bash
+ros2 launch robot_description launch_sim.launch.py world:=./src/robot_description/models/myWorld/boxes_world.sdf
+```
+
+## Step 6: Integrate ros2_control package with new launch file(optional)
 > ⚠️ **Warning:** 
 > I experienced synchronization problems with the `ros2_control` package when using Gazebo and RViz together. In RViz, the motion was based on joint input commands rather than the robot's actual state in Gazebo. This issue becomes apparent when you place obstacles in front of the robot in Gazebo and move it using `teleop_twist_keyboard`. The robot stops in Gazebo but continues moving in RViz.
 
@@ -61,7 +66,12 @@
   `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped`
 
 
+## Step 67: Add [SLAM](https://husarion.com/tutorials/ros2-tutorials/8-slam/#localize-robot)
+Simultaneous Localization and Mapping (SLAM) is a technique used in robotics and computer vision to create a map of an unknown environment while simultaneously keeping track of the robot's location within that environment. It involves the robot using sensor data to build a map of its surroundings and determine its own position relative to that map in real-time.
 
+* Create a new package for SLAM ("robot_slam")
+* Add a launch file for mapping the environment and a param file which shall be launched via the following command : `ros2 launch robot_slam amcl.launch.py`
+* 
 ## Problems & Solutions
 1. The robot moves forward in gazebo and sideward in rviz
    - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
