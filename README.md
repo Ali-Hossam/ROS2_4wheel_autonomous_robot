@@ -66,13 +66,37 @@ ros2 launch robot_description launch_sim.launch.py world:=./src/robot_descriptio
   `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped`
 
 
-## Step 67: Add [SLAM](https://husarion.com/tutorials/ros2-tutorials/8-slam/#localize-robot)
+## Step 7: Add [SLAM](https://husarion.com/tutorials/ros2-tutorials/8-slam/#localize-robot)
 Simultaneous Localization and Mapping (SLAM) is a technique used in robotics and computer vision to create a map of an unknown environment while simultaneously keeping track of the robot's location within that environment. It involves the robot using sensor data to build a map of its surroundings and determine its own position relative to that map in real-time.
 
+### Mapping
 * Create a new package for SLAM ("robot_slam")
 * Add a launch file for mapping the environment and a param file which shall be launched via the following command : `ros2 launch robot_slam amcl.launch.py`
-* 
+* After creating a map save it with SlamToolboxPlugin (Panels - Add new panel - SlamToolboxPlugin)
+
+### Localization
+* AMCL: The AMCL node is used for localization, which means it estimates the robot's pose based on the map and sensor data (e.g., LIDAR). It does not control or move the robot. We previously had the odom frame which allows us to compute the robot position based on the joint movements, now we want a map frame that computes the robot's pose based on the map and the sensor data.
+
+* After saving the map Create a launch file with nodes for map server, amcl and nav_manager (or lifecycle bringup).
+
+> Note that the map_server also only loads the map one time, so I recommend having rviz2 open with the map topic added before you launch the map_server.
+
+```bash
+ros2 launch robot_description launch_sim.launch.py world:=./src/robot_description/models/myWorld/boxes_world.sdf use_sim_time:=true rviz_config_file:=./src/robot_description/rviz/sim_map.config.rviz
+
+ros2 launch robot_slam amcl.launch.py use_sim_time:=true
+```
+## Step 8: Add Navigation (Path Planning & Control)
+we will be using nav2 package. Our controller is expecting the command velocities on /diff_cont/cmd_vel_unstamped but nav2 uses /cmd_vel, so we will be using a node called twist_mux which takes a bunch of twist topics and it is going to multiplix them into a single topic.
+
+* Add twist_mux.yaml config file
+* Copy params file from /opt/ros/humble/share/nav2_bringup/params/nav2_params.yaml into our config folder and modify and base_frame parameter name into dummy_link as defined in our robot urdf file.
+
 ## Problems & Solutions
 1. The robot moves forward in gazebo and sideward in rviz
    - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
    - Solution : Manually change xacro or urdf model so that x-axis points forward
+
+## Resources
+1. https://docs.nav2.org/getting_started/index.html
+2. https://husarion.com/tutorials/ros2-tutorials/8-slam/#rviz-visualization
