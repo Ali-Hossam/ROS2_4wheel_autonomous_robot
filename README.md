@@ -89,9 +89,12 @@ ros2 launch robot_slam amcl.launch.py use_sim_time:=true
 ## Step 8: Add Navigation (Path Planning & Control)
 we will be using nav2 package. Our controller is expecting the command velocities on /diff_cont/cmd_vel_unstamped but nav2 uses /cmd_vel, so we will be using a node called twist_mux which takes a bunch of twist topics and it is going to multiplix them into a single topic.
 
+* Create a new robot_nav package
 * Add twist_mux.yaml config file
-* Copy params file from /opt/ros/humble/share/nav2_bringup/params/nav2_params.yaml into our config folder and modify and base_frame parameter name into dummy_link as defined in our robot urdf file.
+* Copy params file from `/opt/ros/humble/share/nav2_bringup/params/navigation_launch.py` into our config folder and modify and base_frame parameter name into dummy_link as defined in our robot urdf file.
 
+* Copy launch file from `/opt/ros/humble/share/nav2_bringup/launch/nav2_params.yaml`
+* Add launch directory to CMAKELists file
 ## Problems & Solutions
 1. The robot moves forward in gazebo and sideward in rviz
    - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
