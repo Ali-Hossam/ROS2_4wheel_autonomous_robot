@@ -16,7 +16,7 @@ def generate_launch_description():
 
     map_file_arg = DeclareLaunchArgument(
         "map_file",
-        default_value=PathJoinSubstitution([FindPackageShare("robot_slam"), "maps", "boxes_map.yaml"]),
+        default_value=PathJoinSubstitution([FindPackageShare("robot_slam"), "maps", "new_boxes_map.yaml"]),
         description="Full path to the yaml map file",
     )
 
@@ -43,12 +43,16 @@ def generate_launch_description():
     )
 
     nav_manager = Node(
-        package="nav2_util",
-        executable="lifecycle_bringup",
-        name="lifecycle_bringup",
-        arguments=["map_server", "amcl"],
-        output="screen"
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="nav_manager",
+        parameters=[
+            {"use_sim_time": use_sim_time},
+            {"autostart": True},
+            {"node_names": ["map_server", "amcl"]},
+        ],
     )
+
 
     return LaunchDescription(
         [
