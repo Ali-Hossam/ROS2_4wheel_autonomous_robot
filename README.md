@@ -19,9 +19,8 @@ ros2 launch robot_slam mapping.launch.py use_saved_map:=false
 # Use teleop Twist keyboard to navigate in the map
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
-<p align="center">
-    <img width="400" src="gifs/mapping.gif">
-</p>
+https://github.com/Ali-Hossam/swarm_robots_ROS2/assets/77911315/8cf54abb-df63-4886-a7eb-72d437c56407
+
 
 ## Localization
 After creating a map and saving it, you can use the saved map to localize the robot using amcl
@@ -37,10 +36,7 @@ ros2 launch robot_slam amcl.launch.py use_sim_time:=true
 # Use teleop Twist keyboard to navigate in the map
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
-<p align="center">
-    <img width="400" src="gifs/localization.gif">
-</p>
-
+[sped_up_localization.webm](https://github.com/Ali-Hossam/swarm_robots_ROS2/assets/77911315/1424b013-57a4-47e4-8767-938479d910a2)
 
 ## Navigation
 To pass a target location to the robot and make it autonomously plan the path and move to it use the following
@@ -56,9 +52,7 @@ ros2 launch robot_slam amcl.launch.py use_sim_time:=true
 # Launch navigation stack of nav2
 ros2 launch robot_nav navigation_launch.py
 ```
-<p align="center">
-    <img width="400" src="gifs/navigation.gif">
-</p>
+[sped_up_navigation.webm](https://github.com/Ali-Hossam/swarm_robots_ROS2/assets/77911315/6ae3ecd6-3d1d-412b-a919-17e397376f53)
 
 ---
 
