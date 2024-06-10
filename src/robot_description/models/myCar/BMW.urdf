@@ -69,7 +69,7 @@
     <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="LB_wheel">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/Black</material>
     <mu1 value="0.2"/>
     <mu2 value="0.2"/>
   </gazebo>
@@ -99,7 +99,7 @@
     <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="RB_wheel">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/Black</material>
     <mu1 value="0.2"/>
     <mu2 value="0.2"/>
   </gazebo>
@@ -129,7 +129,7 @@
     <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="LF_wheel">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/Black</material>
     <mu1 value="0.2"/>
     <mu2 value="0.2"/>
   </gazebo>
@@ -159,7 +159,7 @@
     <axis xyz="0 0 -1"/>
   </joint>
   <gazebo reference="RF_wheel">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/Black</material>
     <mu1 value="0.2"/>
     <mu2 value="0.2"/>
   </gazebo>

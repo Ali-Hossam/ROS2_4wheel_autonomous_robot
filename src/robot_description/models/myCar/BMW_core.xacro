@@ -80,7 +80,7 @@
     </joint>
 
     <gazebo reference="LB_wheel">
-        <material>Gazebo/Gray</material>
+        <material>Gazebo/Black</material>
         <mu1 value="0.2"/>
         <mu2 value="0.2"/>
     </gazebo>
@@ -114,7 +114,7 @@
     </joint>
     
     <gazebo reference="RB_wheel">
-        <material>Gazebo/Gray</material>
+        <material>Gazebo/Black</material>
         <mu1 value="0.2"/>
         <mu2 value="0.2"/>
     </gazebo>
@@ -148,7 +148,7 @@
     </joint>
 
     <gazebo reference="LF_wheel">
-        <material>Gazebo/Gray</material>
+        <material>Gazebo/Black</material>
         <mu1 value="0.2"/>
         <mu2 value="0.2"/>
     </gazebo>
@@ -181,7 +181,7 @@
     </joint>
 
     <gazebo reference="RF_wheel">
-        <material>Gazebo/Gray</material>
+        <material>Gazebo/Black</material>
         <mu1 value="0.2"/>
         <mu2 value="0.2"/>
     </gazebo>
