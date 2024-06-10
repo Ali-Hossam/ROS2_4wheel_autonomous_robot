@@ -1,3 +1,5 @@
+""" A launch file for slam toolbox used for mapping the environment"""
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution

@@ -1,5 +1,68 @@
-# swarm_robots_ROS2
+# Autonmous Four Wheel robot
+This repository contains the implementation of a four-wheel autonomous robot capable of mapping, localization, and navigation using the ROS 2 framework, Nav2, and AMCL. The project is entirely simulation-based, without any physical hardware components. The README file is divided into two main sections:
 
+1. Getting Started: This section provides detailed instructions on how to set up the development environment, launch the robot simulation, and run the various components of the system.
+2. Project Steps: This section outlines the steps taken to create this autonomous robot in simulation, including the configuration of the navigation stack.
+
+# Getting Started
+## Mapping
+For mapping the environment launch the following launch files each in a separate terminal:
+```bash
+# Launch rviz, gazebo and robot state and joint publishers
+ros2 launch robot_description launch_sim.launch.py world:=./src/robot_description/models/myWorld/boxes_world.sdf use_sim_time:=true rviz_config_file:=./src/robot_description/rviz/sim.config.rviz
+```
+```bash
+# Launch mapping with slamtoolbox
+ros2 launch robot_slam mapping.launch.py use_saved_map:=false
+```
+```bash
+# Use teleop Twist keyboard to navigate in the map
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+<p align="center">
+    <img width="400" src="gifs/mapping.gif">
+</p>
+
+## Localization
+After creating a map and saving it, you can use the saved map to localize the robot using amcl
+```bash
+# Launch rviz, gazebo and robot state and joint publishers
+ros2 launch robot_description launch_sim.launch.py world:=./src/robot_description/models/myWorld/boxes_world.sdf use_sim_time:=true rviz_config_file:=./src/robot_description/rviz/sim_map.config.rviz
+```
+```bash
+# Launch localization with amcl
+ros2 launch robot_slam amcl.launch.py use_sim_time:=true
+```
+```bash
+# Use teleop Twist keyboard to navigate in the map
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+<p align="center">
+    <img width="400" src="gifs/localization.gif">
+</p>
+
+
+## Navigation
+To pass a target location to the robot and make it autonomously plan the path and move to it use the following
+```bash
+# Launch rviz, gazebo and robot state and joint publishers
+ros2 launch robot_description launch_sim.launch.py world:=./robot_description/models/myWorld/boxes_world.sdf use_sim_time:=true rviz_config_file:=./robot_description/rviz/nav.config.rviz
+```
+```bash
+# Launch localization with amcl to load the saved map
+ros2 launch robot_slam amcl.launch.py use_sim_time:=true
+```
+```bash
+# Launch navigation stack of nav2
+ros2 launch robot_nav navigation_launch.py
+```
+<p align="center">
+    <img width="400" src="gifs/navigation.gif">
+</p>
+
+---
+
+# Project Steps:
 ## Step 1: Create a Launch File for the Robot and the World
 
 * Create a package for `robot_description` and add a `/models` directory.
@@ -91,10 +154,11 @@ we will be using nav2 package. Our controller is expecting the command velocitie
 
 * Create a new robot_nav package
 * Add twist_mux.yaml config file
-* Copy params file from `/opt/ros/humble/share/nav2_bringup/params/navigation_launch.py` into our config folder and modify and base_frame parameter name into dummy_link as defined in our robot urdf file.
+* Copy params file from `/opt/ros/humble/share/nav2_bringup/params/nav2_params.py` into our config folder and modify and base_frame parameter name into dummy_link as defined in our robot urdf file.
 
-* Copy launch file from `/opt/ros/humble/share/nav2_bringup/launch/nav2_params.yaml`
+* Copy launch file from `/opt/ros/humble/share/nav2_bringup/launch/navigation_launch.yaml`
 * Add launch directory to CMAKELists file
+
 ## Problems & Solutions
 1. The robot moves forward in gazebo and sideward in rviz
    - Reason : The Robot urdf model doesn't have x-axis points forward and y-axis points sideward
@@ -103,3 +167,4 @@ we will be using nav2 package. Our controller is expecting the command velocitie
 ## Resources
 1. https://docs.nav2.org/getting_started/index.html
 2. https://husarion.com/tutorials/ros2-tutorials/8-slam/#rviz-visualization
+3. https://www.youtube.com/playlist?list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT
